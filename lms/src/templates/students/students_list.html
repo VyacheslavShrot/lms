@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+    <link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Birth date</th>
+            <th scope="col">Age</th>
+            <th scope="col">Department</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <th><img src="
+                    {% static 'img/avatar2.jpeg' %}" width="32" height="36" alt="..."
+                ></th>
+                <th>{{ student.first_name }}</th>
+                <th>{{ student.last_name }}</th>
+                <th>{{ student.email }}</th>
+                <th>{{ student.grade }}</th>
+                {% if student.birth_date %}
+                    <th>{{ student.birth_date }}</th>
+                    <th>{{ student.age }}</th>
+                {% else %}
+                    <th>Undefined</th>
+                    <th>Undefined</th>
+                {% endif %}
+                {% if student.department %}
+                    <th>{{ student.department }}</th>
+                {% else %}
+                    <th>Empty department</th>
+                {% endif %}
+                <th>
+                    <a type="button" class="btn btn-primary"
+                       href="{% url 'students:update_student' student.pk %}">Edit</a>
+                </th>
+                <th>
+                    <a type="button" class="btn btn-danger"
+                       href="{% url 'students:delete_student' student.pk %}">
+                        Delete
+                    </a>
+                </th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

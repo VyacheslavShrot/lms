@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+
+{% block content %}
+
+    <link href="{% static 'css/button.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <div>
+        <form method='POST' class="form" style="width: 18em; align-content: center; margin: auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path fill="currentColor"
+                      d="M4 15h2v5h12V4H6v5H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6zm6-4V8l5 4-5 4v-3H2v-2h8z"></path>
+            </svg>
+            {% csrf_token %}
+            <h>Email or Phone number</h>
+            {{ form|crispy }}<br>
+            <button type="submit" class="my-button btn-shine" value="Login">Login</button>
+        </form>
+    </div>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+{% endblock %}

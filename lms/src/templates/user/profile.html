@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <div class="profile-card center">
+        <div class="profile-card-border-top">
+        </div>
+        <br>
+        <div><img src="{{ user.profile.photo.url }}" width="60" alt="Error">
+        </div>
+        <span>{{ user.first_name|title }} {{ user.last_name|title }}</span>
+        <p class="job">{{ user.username }}</p>
+        <p class="job">Phone number:<br> {{ user.profile.phone_number }}</p>
+        <p class="job">Location:<br>{{ user.profile.city|title }}: {{ user.profile.location }}</p>
+        <p class="job">Email:<br> {{ user.email }}</p>
+        <p class="job" id="user_type">Birth date:<br> {{ user.profile.birth_date }}</p>
+        <p class="job" id="user_type">Type:<br> {{ user.profile.user_type.type }}</p>
+        <p class="job" id="user_type">Gender:<br> {{ user.profile.gender }}</p>
+    </div>
+{% endblock %}

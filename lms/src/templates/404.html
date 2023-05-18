@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+
+    <link href="{% static 'css/button.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <h1>Wrong address or<br>
+        you do not have access to this page</h1><br>
+    <a href="{% url 'core:registration' %}" class="my-button btn-shine">Registration</a><br>
+    <a href="{% url 'index' %}" class="my-button btn-shine">Home page</a><br>
+    <a href="{% url 'core:login' %}" class="my-button btn-shine">Login</a>
+{% endblock %}

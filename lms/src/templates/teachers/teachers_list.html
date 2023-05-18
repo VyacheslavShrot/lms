@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Experience years</th>
+            <th scope="col">Birth date</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Group</th>
+            <th scope="col">To groups</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teacher in teachers %}
+            <tr>
+                <th><img src="
+                    {% static 'img/avatar.png' %}" width="60" height="36"  alt="..."
+                ></th>
+                <th>{{ teacher.first_name }}</th>
+                <th>{{ teacher.last_name }}</th>
+                <th>{{ teacher.email }}</th>
+                <th>{{ teacher.experience_years }}</th>
+                {% if teacher.birth_date %}
+                    <th>{{ teacher.birth_date }}</th>
+                {% else %}
+                    <th>Undefined</th>
+                {% endif %}
+                <th>{{ teacher.subject }}</th>
+                <th>{% for group in teacher.group.all %} {{ group.faculty }}{% endfor %}</th>
+                 <th scope="col"> {% for group in teacher.group.all %}
+                     <a type="button" class="btn btn-primary"
+                            href="{% url 'groups:get_groups_teachers' group.pk %}">{{ group.id }}</a>
+                    {% endfor %}
+                <th>
+                    <a type="button" class="btn btn-primary"
+                       href="{% url 'teachers:update_teacher' teacher.pk %}">Edit</a>
+                </th>
+                <th>
+                    <a type="button" class="btn btn-danger"
+                    href="{% url 'teachers:delete_teacher' teacher.pk %}">Delete</a>
+                </th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

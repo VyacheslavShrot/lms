@@ -1,0 +1,210 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>MY LMS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
+
+
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet">
+</head>
+<body class="bg-image d-flex text-center text-bg-primary"
+      style="background-image: url({% static 'img/background_image.jpeg' %});
+              height: 100vh">
+<div class="cover-container-sm d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <link href="{% static 'css/header_card.css' %}" rel="stylesheet">
+    <header class="mb-auto p-3 text-white">
+        {% if messages %}
+            <ul class="message">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} d-flex align-items-center" role="alert">
+                        <div>
+                            {{ message|safe }}
+                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="header-card card">
+            <div>
+                <h3 class="float-md-start mb-0">My LMS</h3><br>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{% url 'index' %}">Home</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-primary"
+                       href="{% url 'students:get_students' %}">Students</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-info"
+                       href="{% url 'students:create_student' %}">Create</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-primary"
+                       href="{% url 'teachers:get_teachers' %}">Teachers</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-info"
+                       href="{% url 'teachers:create_teacher' %}">Create</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-primary" href="{% url 'groups:get_groups' %}">Groups</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-info" href="{% url 'groups:create_group' %}">Create</a>
+                    <a class="nav-link fw-bold py-1 px-0 text-primary" href="{% url 'core:history' %}">History</a>
+                </nav>
+            </div>
+        </div>
+        <div class="dropdown text-end">
+            <a href="#" class="link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                {% if user.is_authenticated %}
+                    <img src="{{ user.profile.photo }}" alt="{% static "img/avatar.png" %}" width="32" height="32"
+                         class="rounded-circle">
+                {% else %}
+                    <img src="{% static 'img/avatar.png' %}" alt="..." width="36" height="32"
+                         class="rounded-circle">
+                {% endif %}
+            </a>
+            <ul class="dropdown-menu text-small" style="">
+                {% if user.is_authenticated %}
+                    <li><a class="dropdown-item">{{ user.first_name }}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'core:profile_user' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Change password</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'core:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'core:login' %}">Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'core:registration' %}">Registration</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Reset password</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'social:begin' 'google-oauth2' %}">Registration with
+                        Google</a></li>
+                    <li><a class="dropdown-item" href="{% url 'social:begin' 'github' %}">Registration with
+                        Github</a></li>
+                    <li><a class="dropdown-item" href="{% url 'social:begin' 'discord' %}">Registration with
+                        Discord</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+    <br><br>
+    <main class="px-3 text-light ">
+        {% block content %}
+            <h1 class="text-white">My LMS</h1>
+            <p class="lead">Here you can check your students or add a student. And other tasks with them.</p>
+            <link href="{% static 'css/main_button.css' %}" rel="stylesheet">
+            <p class="lead">
+                <a href="{% url 'students:get_students' %}">
+                    <button class="button">Check students list</button>
+                </a>
+            </p>
+            <link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+            <div class="card">
+                <div class="align">
+                    <span class="red"></span>
+                    <span class="yellow"></span>
+                    <span class="green"></span>
+                </div>
+                <h1>SEARCH STUDENT</h1>
+                <link href="{% static 'css/input.css' %}" rel="stylesheet">
+                <form method="GET" action="{% url 'students:get_students' %}">
+                    <div class="input-wrapper">
+                        <link href="{% static 'css/button.css' %}" rel="stylesheet">
+                        <input required="required"
+                               type="text" class="input"
+                               placeholder="Search students"
+                               name="search_text"
+                               aria-label="Search students"
+                               aria-describedby="button-addon2"><br><br>
+                        <button class="my-button btn-shine"
+                                type="submit" id="button-addon2">
+                            <span>Enter</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <br><br>
+            <br>
+            <img src="{% static 'img/main_image.jpeg' %}"
+                 class="img-fluid"
+                 width="750"
+                 alt="">
+        {% endblock %}
+    </main>
+
+    <footer class="mt-auto text-primary-50"><br>
+        <p>Made by <a href="https://gitlab.com/slavikshrot" class="text-primary">@VyacheslavShrot</a>.</p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+</html>

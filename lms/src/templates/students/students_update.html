@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+
+{% block content %}
+
+<link href="{% static 'css/button.css' %}" rel="stylesheet">
+<link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <div>
+        <form method='POST' style="width: 18em; align-content: center; margin: auto">
+            {% csrf_token %}
+            {{ form|crispy }}<br>
+            <button class="my-button btn-shine" type="submit" value="Update">Update</button>
+        </form>
+    </div>
+{% endblock %}

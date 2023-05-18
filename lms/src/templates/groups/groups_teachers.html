@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<link href="{% static 'css/index_card.css' %}" rel="stylesheet">
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Group name</th>
+            <th scope="col">Amount students</th>
+            <th scope="col">Head teacher</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Head teacher email</th>
+            <th scope="col">Head teacher phone</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th><img src="
+                    {% static 'img/avatar3.png' %}" width="35" height="36"  alt="..."
+                ></th>
+            <th>{{ group.group_name }}</th>
+            <th>{{ group.amount_students }}</th>
+            <th>{{ group.head_teacher }}</th>
+            <th>{{ group.faculty }}</th>
+            <th>{{ group.head_teacher_email }}</th>
+            <th>{{ group.head_teacher_phone }}</th>
+            <th>
+                <a type="button" class="btn btn-primary"
+                   href="{% url 'groups:update_group' group.pk %}">Edit</a>
+            </th>
+            <th>
+                <a type="button" class="btn btn-danger"
+                    href="{% url 'groups:delete_group' group.pk %}">Delete</a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
