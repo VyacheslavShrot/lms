@@ -23,6 +23,8 @@ crispy-bootstrap4 = "*"
 django-suit = "==0.2.26"
 django-baton = "*"
 baton = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
